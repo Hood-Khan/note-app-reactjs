@@ -170,6 +170,12 @@ function App() {
     });
   };
 
+  const handleDelete = (index) => {
+    const updatedTasks = tasks.filter((_,i)=> i !== index)
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    setTasks(updatedTasks);
+  }
+
   const handleInputs = (e) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value });
   };
@@ -196,13 +202,16 @@ function App() {
         {tasks.map((item, index) => (
           <div
             key={index}
-            className="bg-zinc-800 border border-zinc-700 rounded-2xl p-5 shadow-md hover:shadow-xl 
-            transition-all group min-h-40"
+            className="bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-8 shadow-md hover:shadow-xl 
+            transition-all group min-h-40 relative"
           >
             <h3 className="text-xl font-bold mb-2 text-blue-300 group-hover:text-blue-400 transition">
               {item.title}
             </h3>
             <p className="text-zinc-300">{item.desc}</p>
+            <div className="text-rose-400 font-bold absolute top-4 right-5" onClick={()=>{handleDelete(index)}}>
+              <X className="w-8 h-8 bg-zinc-700 rounded-full" />
+            </div>
           </div>
         ))}
       </div>
