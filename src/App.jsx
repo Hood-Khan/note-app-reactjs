@@ -28,6 +28,8 @@ function App() {
       title: "",
       desc: "",
     });
+
+    localStorage.setItem("tasks", JSON.stringify([...tasks, inputValues]));
   };
   console.log(tasks);
 
